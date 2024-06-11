@@ -19,11 +19,11 @@ const loginRequest = async(loginParams : loginParams) =>{
             router.push({'name':'dashboard'});
             console.log(responseData.data.data);
         } else {
-          error.value = response.data.message;
+          Error = response.data.message;
         }
       } catch (err) {
-        error.value = 'An error occurred during login. Please try again.';
-        console.error('Login error:', err);
+        let Error = 'An error occurred during login. Please try again.';
+        console.error('Login error:', Error);
       }
 }
 

@@ -29,7 +29,7 @@ import InputText from 'primevue/inputtext';
 import loginRequest from './../services/authService';
 import './../Interfaces/loginParams';
 
-const loginParams = ref<Array<loginParams>>([]);
+const loginParams = ref<loginParams>({email:'',password:''});
 const handleLogin = async() =>  await loginRequest(loginParams.value);
 
 </script>
