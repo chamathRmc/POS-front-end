@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import HelloWorld from './components/HelloWorld.vue'
 </script>
 
 <template>
@@ -7,7 +6,3 @@ import HelloWorld from './components/HelloWorld.vue'
     <router-view></router-view>
   </div>
 </template>
-
-<style scoped>
-
-</style>
