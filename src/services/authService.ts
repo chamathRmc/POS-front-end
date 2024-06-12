@@ -21,7 +21,7 @@ const loginRequest = async(loginParams : loginParams) =>{
         } else {
           throw new Error(response.data.error);
         }
-      } catch (err) {
+      } catch (err:any) {
         console.error('Login error:', err);
         return err.response.data.message;
       }
