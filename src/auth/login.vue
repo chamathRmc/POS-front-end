@@ -1,21 +1,25 @@
 <template>
-    <div class="row">
-        <Card style="width: 25rem; overflow: hidden">
+    <div class="d-flex justify-content-center align-content-center w-100px">
+          <Card class="d-flex h-100 border border-black p-5">
             <template #header>
-                <!-- <img alt="user header" src="/images/usercard.png" /> -->
+                <i class="pi pi-user" style="font-size: 2.5rem"></i>
             </template>
-            <template #title>Advanced Card</template>
-            <template #subtitle>Card subtitle</template>
+            <template #title ><span class="fs-1">Login</span></template>
             <template #content>
-                <div>
-                    <InputText type="email" v-model="loginParams.email" />
-                     <InputText type="password" v-model="loginParams.password" />
+                 <span id="" class="text-danger">{{ error }}</span>
+                <div class="d-flex" style="flex-direction:column;align-items:flex-start">
+                    <label for="email" class="fw-bold fz-3 mb-2 mt-2">Email</label>
+                    <InputText type="email" v-model="loginParams.email" id="email" />
+                </div>
+                <div class="d-flex" style="flex-direction:column;align-items:flex-start">
+                    <label for="password" class="fw-bold fz-3 mb-2 mt-2">Password</label>
+                    <InputText type="password" v-model="loginParams.password" id="password"/>
                 </div>
             </template>
             <template #footer>
-                <div class="flex gap-3 mt-1">
-                    <Button label="Cancel" severity="secondary" outlined class="w-full" />
-                    <Button label="Save" class="w-full" severity="success" @click="handleLogin"/>
+                <div class="d-flex justify-content-start"></div>
+                <div class="d-flex gap-3 mt-1 justify-content-end">
+                    <Button label="Save" class="w-full rounded-4 w-50" severity="success" @click="handleLogin"/>
                 </div>
             </template>
         </Card>
@@ -30,6 +34,7 @@ import loginRequest from './../services/authService';
 import './../Interfaces/loginParams';
 
 const loginParams = ref<loginParams>({email:'',password:''});
-const handleLogin = async() =>  await loginRequest(loginParams.value);
+const error = ref<string>('')
+const handleLogin = async() => { let result = await loginRequest(loginParams.value); error.value = result;}
 
 </script>
