@@ -1,27 +1,33 @@
 
-import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators'
-import { Actions } from '../enums/enums'
+// import { VuexModule, Mutation, Action, Module } from 'vuex-module-decorators'
+// import { Actions } from '../enums/enums'
+
 import axios from './../../aixos';
 
+export default {
 
-@Module
-export default class AuthModule extends VuexModule{
+    state:{
 
+    },
+    actions:{
+
+            login_Request(context:any,data:any){
+                return new Promise<void>((resolve,reject)=>{
+                      axios.post('/api/auth/login',data).then((response:any)=>{
+              
+                          resolve(response.data);
+                    }).catch(({response})=>{
+                      
+                      if(response.status === 422){
+                        reject(response.data.message);
+                      }else{
+                        reject(response.data);
+                      }
+                       
+                    });
+              });
+          }
+    }
+
+  
 }
-// export default class AuthModule extends VuexModule {
-//     @Action
-//     [Actions.LOGIN_REQUEST](params: any){
-//         return new Promise((resolve,reject)=>{
-//             axios.post('/api/auth/login',params).then((response: any) => {
-
-//                 console.log(response);
-//                // context.commit('SUPPLIER_MESSAGE_SET', response.data); 
-     
-//              })
-//                 .catch((error: any)=> {
-//                  console.log(error);
-//                  return error;
-//              });
-//         });
-// //     }
-// }

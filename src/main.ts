@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import router from './router/router';
 import 'primeicons/primeicons.css'
-import store from './store/store';
+import store from './store/module';
 
 const app = createApp(App)
 app.use(PrimeVue);

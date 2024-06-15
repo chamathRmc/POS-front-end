@@ -6,7 +6,7 @@
             </template>
             <template #title ><span class="fs-1">Login</span></template>
             <template #content>
-                 <span id="" class="text-danger">{{ error }}</span>
+                 <span id="" class="text-danger ">{{ error }}</span>
                 <div class="d-flex" style="flex-direction:column;align-items:flex-start">
                     <label for="email" class="fw-bold fz-3 mb-2 mt-2">Email</label>
                     <InputText type="email" v-model="loginParams.email" id="email" />
@@ -37,18 +37,20 @@ import InputText from 'primevue/inputtext';
 import {loginRequest, changeType } from './../services/authService';
 import './../Interfaces/loginParams';
 import { useStore } from "vuex";
+import { useRouter } from 'vue-router';
+const store = useStore();
+const router = useRouter();
 
-import { Actions } from '../store/enums/enums';
 
 const loginParams = ref<loginParams>({email:'',password:''});
 const error = ref<string>('');
 const iconType = ref<string>('pi pi-eye');
 const passwordType = ref<string>('password');
-const store = useStore();
-const handleLogin = async() => { let result = store.dispatch(Actions.LOGIN_REQUEST, {
-        email: loginParams.email,
-        password: loginParams.password,
-      });}
+
+const handleLogin = async() => {
+    let result = await loginRequest(loginParams.value,store,router);
+    error.value = result;    
+    }
 const passwordTypeChange = () =>{
      let result =changeType(passwordType.value,iconType.value);
         passwordType.value = result.passwordType;
